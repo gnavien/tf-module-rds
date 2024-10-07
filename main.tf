@@ -40,7 +40,7 @@ resource "aws_rds_cluster" "main" {
   master_password        = data.aws_ssm_parameter.password.value
   db_subnet_group_name   = aws_db_subnet_group.main.name
 #  storage_encrypted      = true
-#  kms_key_id             = var.kms_key_arn
+#  kms_key_id             = var.kms_key_arn # kms_key we create on our own which is customer managed key
   vpc_security_group_ids = [aws_security_group.main.id]
   skip_final_snapshot    = true
 }
@@ -54,12 +54,4 @@ resource "aws_rds_cluster_instance" "main" {
   engine_version     = var.engine_version
 }
 
-#resource "aws_rds_cluster_instance" "cluster_instances" {
-#  count              = 2
-#  identifier         = "aurora-cluster-demo-${count.index}"
-#  cluster_identifier = aws_rds_cluster.default.id
-#  instance_class     = "db.r4.large"
-#  engine             = aws_rds_cluster.default.engine
-#  engine_version     = aws_rds_cluster.default.engine_version
-#}
 
