@@ -41,7 +41,7 @@ resource "aws_rds_cluster" "main" {
   db_subnet_group_name   = aws_db_subnet_group.main.name # Above we have created a subnet group so we are using it.
   storage_encrypted      = true
   kms_key_id             = var.kms_key_arn # kms_key we create on our own which is customer managed key
-  vpc_security_group_ids = [aws_security_group.main.id]
+  vpc_security_group_ids = [aws_security_group.main.id] # check on this
   skip_final_snapshot    = true
 }
 
